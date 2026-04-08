@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>net_ECG | Wireless Holter Monitoring | Biotronik</title>
+    <title>net_ECG | ניטור הולטר אלחוטי | Biotronik</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Instrument+Serif:ital@0;1&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --ink: #0a0f1a;
@@ -27,11 +27,12 @@
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Heebo', 'DM Sans', sans-serif;
             color: var(--ink);
             background: var(--paper);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            direction: rtl;
         }
 
         /* ── NAV ── */
@@ -273,7 +274,7 @@
         .hero-float-card {
             position: absolute;
             bottom: -30px;
-            left: -40px;
+            right: -40px;
             background: var(--card-bg);
             padding: 1.2rem 1.6rem;
             border-radius: 16px;
@@ -316,11 +317,11 @@
             line-height: 1.2;
         }
 
-        .hero-float-card.right {
+        .hero-float-card.left {
             bottom: auto;
-            left: auto;
+            right: auto;
             top: 20px;
-            right: -30px;
+            left: -30px;
             animation-delay: 1.5s;
         }
 
@@ -391,13 +392,13 @@
             font-weight: 600;
             margin-bottom: 1rem;
             position: relative;
-            padding-left: 2rem;
+            padding-right: 2rem;
         }
 
         .section-tag::before {
             content: '';
             position: absolute;
-            left: 0;
+            right: 0;
             top: 50%;
             width: 1.2rem;
             height: 1px;
@@ -466,7 +467,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent), transparent);
+            background: linear-gradient(270deg, var(--accent), transparent);
             opacity: 0;
             transition: opacity 0.4s;
         }
@@ -966,26 +967,26 @@
         <span>net_ECG</span>
     </div>
     <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#specs">Specifications</a></li>
-        <li><a href="#analysis">AI Analysis</a></li>
-        <li><a href="#workflow">How It Works</a></li>
-        <li><a href="#contact" class="nav-cta">Request Demo</a></li>
+        <li><a href="#features">יתרונות</a></li>
+        <li><a href="#specs">מפרט טכני</a></li>
+        <li><a href="#analysis">ניתוח AI</a></li>
+        <li><a href="#workflow">איך זה עובד</a></li>
+        <li><a href="#contact" class="nav-cta">הזמנת הדגמה</a></li>
     </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
     <div class="hero-text">
-        <div class="hero-badge">Next-Generation Holter</div>
-        <h1>Cardiac monitoring,<br><em>liberated.</em></h1>
-        <p class="hero-sub">The net_ECG wireless Holter recorder redefines long-term ECG monitoring. No cables. No bulk. Just 23 grams of precision, worn invisibly for up to 60 days.</p>
+        <div class="hero-badge">הולטר מהדור הבא</div>
+        <h1>ניטור לבבי,<br><em>ללא מגבלות.</em></h1>
+        <p class="hero-sub">מכשיר ההולטר האלחוטי net_ECG מגדיר מחדש את הניטור הלבבי ארוך הטווח. ללא כבלים. ללא מגבלות. רק 23 גרם של דיוק, נלבש באופן בלתי מורגש עד 60 יום.</p>
         <div class="hero-actions">
             <a href="#contact" class="btn-primary">
-                Request a Demo
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                הזמנת הדגמה
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8l-4 4m0 0l4 4m-4-4h18"/></svg>
             </a>
-            <a href="#specs" class="btn-ghost">View Specs</a>
+            <a href="#specs" class="btn-ghost">מפרט טכני</a>
         </div>
     </div>
     <div class="hero-visual">
@@ -996,17 +997,17 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
                 </div>
                 <div>
-                    <div class="float-label">Weight</div>
+                    <div class="float-label">משקל</div>
                     <div class="float-value">23g</div>
                 </div>
             </div>
-            <div class="hero-float-card right">
+            <div class="hero-float-card left">
                 <div class="float-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
                 <div>
-                    <div class="float-label">Battery Life</div>
-                    <div class="float-value">12 days</div>
+                    <div class="float-label">חיי סוללה</div>
+                    <div class="float-value">12 ימים</div>
                 </div>
             </div>
         </div>
@@ -1025,71 +1026,71 @@
 <div class="stats-bar">
     <div class="stat-item reveal">
         <div class="stat-number">23<span class="stat-unit">g</span></div>
-        <div class="stat-label">Ultra-lightweight</div>
+        <div class="stat-label">קל במיוחד</div>
     </div>
     <div class="stat-item reveal">
-        <div class="stat-number">60<span class="stat-unit">days</span></div>
-        <div class="stat-label">Extended monitoring</div>
+        <div class="stat-number">60<span class="stat-unit"> יום</span></div>
+        <div class="stat-label">ניטור מורחב</div>
     </div>
     <div class="stat-item reveal">
         <div class="stat-number">80<span class="stat-unit">%</span></div>
-        <div class="stat-label">Faster analysis</div>
+        <div class="stat-label">ניתוח מהיר יותר</div>
     </div>
     <div class="stat-item reveal">
         <div class="stat-number">50<span class="stat-unit">+</span></div>
-        <div class="stat-label">Years of excellence</div>
+        <div class="stat-label">שנות מצוינות</div>
     </div>
 </div>
 
 <!-- FEATURES -->
 <section class="features" id="features">
     <div class="features-header reveal">
-        <div class="section-tag">Why net_ECG</div>
-        <h2 class="section-title">Engineered for comfort.<br>Built for clarity.</h2>
-        <p class="section-desc">Every detail of the net_ECG was designed to disappear on the patient while delivering clinical-grade ECG data to your practice.</p>
+        <div class="section-tag">למה net_ECG</div>
+        <h2 class="section-title">תוכנן לנוחות.<br>נבנה לדיוק.</h2>
+        <p class="section-desc">כל פרט ב-net_ECG תוכנן להיעלם על גוף המטופל, תוך אספקת נתוני ECG ברמה קלינית למרפאה שלך.</p>
     </div>
     <div class="features-grid">
         <div class="feature-card reveal">
             <div class="feature-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
             </div>
-            <h3>Zero Cables</h3>
-            <p>No wires, no tangles. The device snaps directly onto three standard adhesive ECG electrodes for a completely wireless experience.</p>
+            <h3>ללא כבלים</h3>
+            <p>ללא חוטים, ללא סבך. המכשיר מתחבר ישירות לשלוש אלקטרודות ECG דביקות סטנדרטיות לחוויה אלחוטית לחלוטין.</p>
         </div>
         <div class="feature-card reveal">
             <div class="feature-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </div>
-            <h3>Patient Comfort</h3>
-            <p>At just 23 grams and 50×50mm, patients forget they're wearing it. Shower-safe IP54 rating means zero lifestyle disruption.</p>
+            <h3>נוחות למטופל</h3>
+            <p>במשקל של 23 גרם בלבד ובמידות 50×50 מ"מ, המטופלים שוכחים שהם עונדים אותו. דירוג IP54 עמיד במים מאפשר מקלחת ללא הפרעה.</p>
         </div>
         <div class="feature-card reveal">
             <div class="feature-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
             </div>
-            <h3>3-Lead ECG</h3>
-            <p>Captures three simultaneous ECG channels with excellent signal quality. Clearly visible P, QRS, and T waves for confident diagnosis.</p>
+            <h3>ECG ב-3 ערוצים</h3>
+            <p>מקליט שלושה ערוצי ECG בו-זמנית באיכות אות מעולה. גלי P, QRS ו-T נראים בבירור לאבחון מהימן.</p>
         </div>
         <div class="feature-card reveal">
             <div class="feature-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
-            <h3>12-Day Battery</h3>
-            <p>Record continuously for up to 12 days on a single charge. Extend to 60 days with cyclic charging via the net_ECG CONNECT cradle.</p>
+            <h3>סוללה ל-12 ימים</h3>
+            <p>הקלטה רציפה עד 12 ימים בטעינה אחת. הארכה עד 60 יום באמצעות טעינה מחזורית דרך עריסת net_ECG CONNECT.</p>
         </div>
         <div class="feature-card reveal">
             <div class="feature-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             </div>
-            <h3>AI-Powered Reports</h3>
-            <p>Cardiomatics AI analyzes recordings and generates comprehensive reports, reducing analysis workload by up to 80%.</p>
+            <h3>דוחות מבוססי AI</h3>
+            <p>בינה מלאכותית של Cardiomatics מנתחת הקלטות ומפיקה דוחות מקיפים, וחוסכת עד 80% מעומס הניתוח.</p>
         </div>
         <div class="feature-card reveal">
             <div class="feature-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg>
             </div>
-            <h3>Bluetooth Connected</h3>
-            <p>Wireless initialization and real-time signal quality monitoring via Bluetooth. Seamless integration into your clinical workflow.</p>
+            <h3>חיבור Bluetooth</h3>
+            <p>אתחול אלחוטי וניטור איכות אות בזמן אמת באמצעות Bluetooth. שילוב חלק בזרימת העבודה הקלינית שלך.</p>
         </div>
     </div>
 </section>
@@ -1111,41 +1112,41 @@
             </div>
         </div>
         <div class="reveal">
-            <div class="section-tag">Technical Specifications</div>
-            <h2 class="section-title">Precision in every<br>millimeter.</h2>
-            <p class="section-desc">The net_ECG packs advanced cardiac monitoring technology into a device smaller than a matchbox.</p>
+            <div class="section-tag">מפרט טכני</div>
+            <h2 class="section-title">דיוק בכל<br>מילימטר.</h2>
+            <p class="section-desc">ה-net_ECG אורז טכנולוגיית ניטור לבבי מתקדמת במכשיר קטן מקופסת גפרורים.</p>
             <div class="spec-list">
                 <div class="spec-item">
-                    <span class="spec-label">Dimensions</span>
-                    <span class="spec-value">50 &times; 50 &times; 13.5 <span class="highlight">mm</span></span>
+                    <span class="spec-label">ממדים</span>
+                    <span class="spec-value">50 &times; 50 &times; 13.5 <span class="highlight">מ"מ</span></span>
                 </div>
                 <div class="spec-item">
-                    <span class="spec-label">Weight</span>
-                    <span class="spec-value">23 <span class="highlight">grams</span></span>
+                    <span class="spec-label">משקל</span>
+                    <span class="spec-value">23 <span class="highlight">גרם</span></span>
                 </div>
                 <div class="spec-item">
-                    <span class="spec-label">ECG Channels</span>
-                    <span class="spec-value">3-lead <span class="highlight">simultaneous</span></span>
+                    <span class="spec-label">ערוצי ECG</span>
+                    <span class="spec-value">3 ערוצים <span class="highlight">בו-זמנית</span></span>
                 </div>
                 <div class="spec-item">
-                    <span class="spec-label">Battery Life</span>
-                    <span class="spec-value">Up to <span class="highlight">12 days</span> / charge</span>
+                    <span class="spec-label">חיי סוללה</span>
+                    <span class="spec-value">עד <span class="highlight">12 ימים</span> לטעינה</span>
                 </div>
                 <div class="spec-item">
-                    <span class="spec-label">Extended Monitoring</span>
-                    <span class="spec-value">Up to <span class="highlight">60 days</span></span>
+                    <span class="spec-label">ניטור מורחב</span>
+                    <span class="spec-value">עד <span class="highlight">60 יום</span></span>
                 </div>
                 <div class="spec-item">
-                    <span class="spec-label">Water Resistance</span>
-                    <span class="spec-value"><span class="highlight">IP54</span> rated</span>
+                    <span class="spec-label">עמידות למים</span>
+                    <span class="spec-value">דירוג <span class="highlight">IP54</span></span>
                 </div>
                 <div class="spec-item">
-                    <span class="spec-label">Connectivity</span>
+                    <span class="spec-label">קישוריות</span>
                     <span class="spec-value">Bluetooth <span class="highlight">LE</span></span>
                 </div>
                 <div class="spec-item">
-                    <span class="spec-label">Electrodes</span>
-                    <span class="spec-value">Standard adhesive <span class="highlight">ECG</span></span>
+                    <span class="spec-label">אלקטרודות</span>
+                    <span class="spec-value">אלקטרודות <span class="highlight">ECG</span> דביקות סטנדרטיות</span>
                 </div>
             </div>
         </div>
@@ -1156,7 +1157,7 @@
 <section class="ai-section" id="analysis">
     <div class="ai-grid">
         <div class="ai-visual reveal">
-            <div class="ecg-label">Live ECG Trace &mdash; Lead II</div>
+            <div class="ecg-label">מעקב ECG חי &mdash; Lead II</div>
             <div class="ecg-trace">
                 <svg viewBox="0 0 600 120" preserveAspectRatio="none">
                     <path class="ecg-line-continuous" d="M0,60 L40,60 L50,60 L55,45 L60,60 L70,60 L75,20 L80,100 L85,10 L90,90 L95,60 L110,60 L115,52 L120,60 L160,60 L170,60 L175,45 L180,60 L190,60 L195,20 L200,100 L205,10 L210,90 L215,60 L230,60 L235,52 L240,60 L280,60 L290,60 L295,45 L300,60 L310,60 L315,20 L320,100 L325,10 L330,90 L335,60 L350,60 L355,52 L360,60 L400,60 L410,60 L415,45 L420,60 L430,60 L435,20 L440,100 L445,10 L450,90 L455,60 L470,60 L475,52 L480,60 L520,60 L530,60 L535,45 L540,60 L550,60 L555,20 L560,100 L565,10 L570,90 L575,60 L590,60 L595,52 L600,60"
@@ -1173,33 +1174,33 @@
                 <span class="ai-badge">P Wave &check;</span>
                 <span class="ai-badge">QRS Complex &check;</span>
                 <span class="ai-badge">T Wave &check;</span>
-                <span class="ai-badge">Rhythm: NSR</span>
+                <span class="ai-badge">קצב: NSR</span>
             </div>
         </div>
         <div class="ai-content reveal">
-            <div class="section-tag">Cardiomatics AI</div>
-            <h2 class="section-title">Intelligence that<br>accelerates diagnosis.</h2>
-            <p class="section-desc">Powered by the Cardiomatics platform, net_ECG leverages artificial intelligence to interpret recordings with precision &mdash; reducing your analysis workload by up to 80%.</p>
+            <div class="section-tag">בינה מלאכותית Cardiomatics</div>
+            <h2 class="section-title">בינה שמאיצה<br>את האבחון.</h2>
+            <p class="section-desc">מונע על ידי פלטפורמת Cardiomatics, ה-net_ECG מנצל בינה מלאכותית לפירוש הקלטות בדיוק מרבי &mdash; וחוסך עד 80% מעומס הניתוח שלך.</p>
             <div class="ai-steps">
                 <div class="ai-step">
                     <div class="ai-step-num">1</div>
                     <div>
-                        <h4>Continuous Recording</h4>
-                        <p>The device captures high-fidelity 3-lead ECG data around the clock, worn comfortably by the patient.</p>
+                        <h4>הקלטה רציפה</h4>
+                        <p>המכשיר מקליט נתוני ECG ב-3 ערוצים באיכות גבוהה מסביב לשעון, נלבש בנוחות על ידי המטופל.</p>
                     </div>
                 </div>
                 <div class="ai-step">
                     <div class="ai-step-num">2</div>
                     <div>
-                        <h4>AI-Driven Interpretation</h4>
-                        <p>Cardiomatics algorithms analyze the full recording, flagging arrhythmias and abnormalities automatically.</p>
+                        <h4>פירוש מונע AI</h4>
+                        <p>אלגוריתמי Cardiomatics מנתחים את ההקלטה המלאה, ומסמנים הפרעות קצב וחריגות באופן אוטומטי.</p>
                     </div>
                 </div>
                 <div class="ai-step">
                     <div class="ai-step-num">3</div>
                     <div>
-                        <h4>Expert-Reviewed Report</h4>
-                        <p>Every AI-generated report undergoes professional clinical review before delivery to your practice.</p>
+                        <h4>דוח בבדיקת מומחה</h4>
+                        <p>כל דוח שנוצר על ידי AI עובר סקירה קלינית מקצועית לפני המסירה למרפאה שלך.</p>
                     </div>
                 </div>
             </div>
@@ -1210,62 +1211,62 @@
 <!-- WORKFLOW -->
 <section class="workflow" id="workflow">
     <div class="workflow-header reveal">
-        <div class="section-tag">Clinical Workflow</div>
-        <h2 class="section-title">From attachment to analysis<br>in four simple steps.</h2>
-        <p class="section-desc">Streamlined for busy practices. Minimal setup, maximum diagnostic value.</p>
+        <div class="section-tag">זרימת עבודה קלינית</div>
+        <h2 class="section-title">מהחיבור לניתוח<br>בארבעה צעדים פשוטים.</h2>
+        <p class="section-desc">מותאם למרפאות עמוסות. הגדרה מינימלית, ערך אבחוני מרבי.</p>
     </div>
     <div class="workflow-steps">
         <div class="wf-step reveal">
             <div class="wf-num">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/></svg>
             </div>
-            <h4>Initialize</h4>
-            <p>Pair via Bluetooth and assign to patient in seconds.</p>
+            <h4>אתחול</h4>
+            <p>צימוד באמצעות Bluetooth ושיוך למטופל בשניות.</p>
         </div>
         <div class="wf-step reveal">
             <div class="wf-num">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             </div>
-            <h4>Attach</h4>
-            <p>Snap onto three standard adhesive electrodes on the patient's chest.</p>
+            <h4>חיבור</h4>
+            <p>הצמדה לשלוש אלקטרודות דביקות סטנדרטיות על חזה המטופל.</p>
         </div>
         <div class="wf-step reveal">
             <div class="wf-num">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
             </div>
-            <h4>Monitor</h4>
-            <p>Patient wears the device for up to 60 days of continuous recording.</p>
+            <h4>ניטור</h4>
+            <p>המטופל עונד את המכשיר עד 60 יום של הקלטה רציפה.</p>
         </div>
         <div class="wf-step reveal">
             <div class="wf-num">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
             </div>
-            <h4>Report</h4>
-            <p>Receive AI-analyzed, expert-reviewed ECG report within days.</p>
+            <h4>דוח</h4>
+            <p>קבלת דוח ECG מנותח על ידי AI ונבדק על ידי מומחה תוך ימים.</p>
         </div>
     </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
-    <h2 class="section-title">Ready to transform your<br>cardiac monitoring?</h2>
-    <p class="section-desc">Join the growing network of clinics using net_ECG to deliver better patient outcomes with less operational overhead.</p>
+    <h2 class="section-title">מוכנים לשנות את<br>הניטור הלבבי שלכם?</h2>
+    <p class="section-desc">הצטרפו לרשת ההולכת וגדלה של מרפאות המשתמשות ב-net_ECG לתוצאות טובות יותר עם פחות עומס תפעולי.</p>
     <div class="cta-buttons">
         <a href="mailto:info@medlab.co.il" class="btn-primary">
-            Request a Demo
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            הזמנת הדגמה
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8l-4 4m0 0l4 4m-4-4h18"/></svg>
         </a>
-        <a href="tel:+972-3-XXX-XXXX" class="btn-ghost">Contact Sales</a>
+        <a href="tel:+972-3-XXX-XXXX" class="btn-ghost">צרו קשר</a>
     </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-    <div>&copy; 2026 Biotronik &middot; Quality for Life</div>
+    <div>&copy; 2026 Biotronik &middot; איכות לחיים</div>
     <div class="footer-links">
-        <a href="https://www.medlab.co.il">MedLab Israel</a>
-        <a href="https://www.biotronik.com">Biotronik Global</a>
-        <a href="#">Privacy Policy</a>
+        <a href="https://www.medlab.co.il">MedLab ישראל</a>
+        <a href="https://www.biotronik.com">Biotronik עולמי</a>
+        <a href="#">מדיניות פרטיות</a>
     </div>
 </footer>
 
