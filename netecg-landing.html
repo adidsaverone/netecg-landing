@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>net_ECG | Wireless Holter Monitoring | Biotronik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0a0f1a;
+            --paper: #f4f1ec;
+            --accent: #00b27a;
+            --accent-dim: #009966;
+            --accent-glow: rgba(0, 178, 122, 0.15);
+            --slate: #6b7280;
+            --mist: #e8e4dd;
+            --deep: #111827;
+            --card-bg: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--ink);
+            background: var(--paper);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            background: rgba(244, 241, 236, 0.8);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.75rem 3rem;
+            background: rgba(244, 241, 236, 0.95);
+            box-shadow: 0 1px 30px rgba(0,0,0,0.06);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-logo img {
+            height: 28px;
+        }
+
+        .nav-logo span {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.35rem;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-cta {
+            background: var(--ink);
+            color: var(--paper) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 100px;
+            text-transform: uppercase !important;
+            font-size: 0.8rem !important;
+            letter-spacing: 0.06em !important;
+            transition: background 0.3s, transform 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent) !important;
+            color: #fff !important;
+            transform: translateY(-1px);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 8rem 5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            animation: pulseGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .hero-text {
+            max-width: 600px;
+            animation: fadeSlideUp 1s ease-out 0.2s both;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-glow);
+            border: 1px solid rgba(0, 178, 122, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(3rem, 5.5vw, 5rem);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--slate);
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 2.2rem;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 178, 122, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dim);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 178, 122, 0.4);
+        }
+
+        .btn-primary svg { width: 16px; height: 16px; }
+
+        .btn-ghost {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--ink);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            border: 1.5px solid var(--mist);
+            border-radius: 100px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--ink);
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeSlideUp 1s ease-out 0.5s both;
+        }
+
+        .hero-img-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .hero-img-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.04);
+        }
+
+        .hero-float-card {
+            position: absolute;
+            bottom: -30px;
+            left: -40px;
+            background: var(--card-bg);
+            padding: 1.2rem 1.6rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .float-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .float-icon svg { width: 22px; height: 22px; color: var(--accent); }
+
+        .float-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--slate);
+            font-weight: 500;
+        }
+
+        .float-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+
+        .hero-float-card.right {
+            bottom: auto;
+            left: auto;
+            top: 20px;
+            right: -30px;
+            animation-delay: 1.5s;
+        }
+
+        /* ── ECG LINE DIVIDER ── */
+        .ecg-divider {
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ecg-divider svg {
+            width: 100%;
+            max-width: 1200px;
+            height: 60px;
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            background: var(--deep);
+            padding: 4rem 5rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            animation: fadeSlideUp 0.6s ease-out both;
+        }
+
+        .stat-number {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3.5rem;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-unit {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.5);
+            font-weight: 400;
+        }
+
+        /* ── SECTION COMMON ── */
+        section {
+            padding: 7rem 5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .section-tag::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 1.2rem;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 1.2rem;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--slate);
+            line-height: 1.7;
+            max-width: 550px;
+            font-weight: 300;
+        }
+
+        /* ── FEATURES ── */
+        .features {
+            background: var(--paper);
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .features-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+            border-color: rgba(0, 178, 122, 0.15);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover::after { opacity: 1; }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon svg {
+            width: 26px;
+            height: 26px;
+            color: var(--accent);
+            stroke-width: 1.5;
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--ink);
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--slate);
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        /* ── PRODUCT SHOWCASE ── */
+        .showcase {
+            background: var(--deep);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase::before {
+            content: '';
+            position: absolute;
+            bottom: -300px;
+            left: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0,178,122,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .showcase-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .showcase-img-main {
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.95);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s;
+            width: 100%;
+        }
+
+        .showcase-img-main:hover { transform: scale(1.02); }
+
+        .showcase-img-main img {
+            max-width: 280px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.15));
+        }
+
+        .showcase-img-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .showcase-img-small {
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.95);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s;
+        }
+
+        .showcase-img-small:hover { transform: scale(1.03); }
+
+        .showcase-img-small img {
+            max-width: 100%;
+            max-height: 160px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 6px 20px rgba(0,0,0,0.1));
+        }
+
+        .showcase .section-tag { color: var(--accent); }
+        .showcase .section-tag::before { background: var(--accent); }
+        .showcase .section-title { color: #fff; }
+        .showcase .section-desc { color: rgba(255,255,255,0.55); }
+
+        .spec-list {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .spec-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+        }
+
+        .spec-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .spec-value .highlight {
+            color: var(--accent);
+        }
+
+        /* ── AI SECTION ── */
+        .ai-section {
+            background: var(--paper);
+            position: relative;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .ai-visual {
+            position: relative;
+            background: linear-gradient(135deg, var(--deep) 0%, #1a2332 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .ai-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(0,178,122,0.03) 30px, rgba(0,178,122,0.03) 31px),
+                repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(0,178,122,0.03) 30px, rgba(0,178,122,0.03) 31px);
+            pointer-events: none;
+        }
+
+        .ecg-trace {
+            width: 100%;
+            height: 120px;
+            position: relative;
+        }
+
+        .ecg-trace svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .ecg-label {
+            color: var(--accent);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .ai-badges {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .ai-badge {
+            background: rgba(0, 178, 122, 0.1);
+            border: 1px solid rgba(0, 178, 122, 0.2);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .ai-content .section-desc {
+            margin-bottom: 2rem;
+        }
+
+        .ai-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ai-step {
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .ai-step-num {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 12px;
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .ai-step h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .ai-step p {
+            font-size: 0.85rem;
+            color: var(--slate);
+            line-height: 1.55;
+            font-weight: 300;
+        }
+
+        /* ── WORKFLOW ── */
+        .workflow {
+            background: #fafaf7;
+            text-align: center;
+        }
+
+        .workflow-header {
+            margin-bottom: 4rem;
+        }
+
+        .workflow-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .workflow-steps::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 12%;
+            right: 12%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--mist), var(--accent), var(--accent), var(--mist));
+            z-index: 0;
+        }
+
+        .wf-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .wf-num {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,178,122,0.1);
+        }
+
+        .wf-num svg {
+            width: 28px;
+            height: 28px;
+            color: var(--accent);
+        }
+
+        .wf-step h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .wf-step p {
+            font-size: 0.82rem;
+            color: var(--slate);
+            line-height: 1.55;
+            max-width: 200px;
+            font-weight: 300;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            background: linear-gradient(135deg, var(--deep) 0%, #0d1925 50%, #0a1a15 100%);
+            text-align: center;
+            padding: 8rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0,178,122,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-section .section-title {
+            color: #fff;
+            max-width: 650px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta-section .section-desc {
+            color: rgba(255,255,255,0.5);
+            max-width: 500px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .cta-buttons .btn-ghost {
+            color: #fff;
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .cta-buttons .btn-ghost:hover {
+            border-color: #fff;
+            background: #fff;
+            color: var(--ink);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.4);
+            padding: 3rem 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover { color: var(--accent); }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ECG animation */
+        .ecg-line {
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+            animation: drawECG 3s ease-in-out forwards;
+        }
+
+        @keyframes drawECG {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .ecg-line-continuous {
+            stroke-dasharray: 2000;
+            animation: scrollECG 4s linear infinite;
+        }
+
+        @keyframes scrollECG {
+            from { stroke-dashoffset: 0; }
+            to { stroke-dashoffset: -2000; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            nav { padding: 1rem 2rem; }
+            section { padding: 5rem 2rem; }
+            .hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; gap: 3rem; }
+            .hero-visual { order: -1; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+            .showcase-grid, .ai-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 3rem 2rem; }
+            .workflow-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .workflow-steps::before { display: none; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .stats-bar { grid-template-columns: 1fr 1fr; }
+            .showcase-img-row { grid-template-columns: 1fr; }
+            .workflow-steps { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .hero-float-card { display: none; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-logo">
+        <img src="https://www.medlab.co.il/wp-content/uploads/2015/11/logoBIOT50.png.webp" alt="Biotronik Logo">
+        <span>net_ECG</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#specs">Specifications</a></li>
+        <li><a href="#analysis">AI Analysis</a></li>
+        <li><a href="#workflow">How It Works</a></li>
+        <li><a href="#contact" class="nav-cta">Request Demo</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-text">
+        <div class="hero-badge">Next-Generation Holter</div>
+        <h1>Cardiac monitoring,<br><em>liberated.</em></h1>
+        <p class="hero-sub">The net_ECG wireless Holter recorder redefines long-term ECG monitoring. No cables. No bulk. Just 23 grams of precision, worn invisibly for up to 60 days.</p>
+        <div class="hero-actions">
+            <a href="#contact" class="btn-primary">
+                Request a Demo
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="#specs" class="btn-ghost">View Specs</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="hero-img-wrapper">
+            <img src="https://www.medlab.co.il/wp-content/uploads/2023/08/NETECG-body-copy.jpg" alt="net_ECG device worn on patient chest">
+            <div class="hero-float-card">
+                <div class="float-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+                </div>
+                <div>
+                    <div class="float-label">Weight</div>
+                    <div class="float-value">23g</div>
+                </div>
+            </div>
+            <div class="hero-float-card right">
+                <div class="float-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                    <div class="float-label">Battery Life</div>
+                    <div class="float-value">12 days</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ECG DIVIDER -->
+<div class="ecg-divider">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path class="ecg-line" d="M0,30 L200,30 L220,30 L230,10 L240,50 L250,5 L260,55 L270,30 L290,30 L500,30 L520,30 L530,10 L540,50 L550,5 L560,55 L570,30 L590,30 L800,30 L820,30 L830,10 L840,50 L850,5 L860,55 L870,30 L890,30 L1200,30"
+              fill="none" stroke="#00b27a" stroke-width="2" opacity="0.4"/>
+    </svg>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+    <div class="stat-item reveal">
+        <div class="stat-number">23<span class="stat-unit">g</span></div>
+        <div class="stat-label">Ultra-lightweight</div>
+    </div>
+    <div class="stat-item reveal">
+        <div class="stat-number">60<span class="stat-unit">days</span></div>
+        <div class="stat-label">Extended monitoring</div>
+    </div>
+    <div class="stat-item reveal">
+        <div class="stat-number">80<span class="stat-unit">%</span></div>
+        <div class="stat-label">Faster analysis</div>
+    </div>
+    <div class="stat-item reveal">
+        <div class="stat-number">50<span class="stat-unit">+</span></div>
+        <div class="stat-label">Years of excellence</div>
+    </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+    <div class="features-header reveal">
+        <div class="section-tag">Why net_ECG</div>
+        <h2 class="section-title">Engineered for comfort.<br>Built for clarity.</h2>
+        <p class="section-desc">Every detail of the net_ECG was designed to disappear on the patient while delivering clinical-grade ECG data to your practice.</p>
+    </div>
+    <div class="features-grid">
+        <div class="feature-card reveal">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+            </div>
+            <h3>Zero Cables</h3>
+            <p>No wires, no tangles. The device snaps directly onto three standard adhesive ECG electrodes for a completely wireless experience.</p>
+        </div>
+        <div class="feature-card reveal">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <h3>Patient Comfort</h3>
+            <p>At just 23 grams and 50×50mm, patients forget they're wearing it. Shower-safe IP54 rating means zero lifestyle disruption.</p>
+        </div>
+        <div class="feature-card reveal">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <h3>3-Lead ECG</h3>
+            <p>Captures three simultaneous ECG channels with excellent signal quality. Clearly visible P, QRS, and T waves for confident diagnosis.</p>
+        </div>
+        <div class="feature-card reveal">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3>12-Day Battery</h3>
+            <p>Record continuously for up to 12 days on a single charge. Extend to 60 days with cyclic charging via the net_ECG CONNECT cradle.</p>
+        </div>
+        <div class="feature-card reveal">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <h3>AI-Powered Reports</h3>
+            <p>Cardiomatics AI analyzes recordings and generates comprehensive reports, reducing analysis workload by up to 80%.</p>
+        </div>
+        <div class="feature-card reveal">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0"/></svg>
+            </div>
+            <h3>Bluetooth Connected</h3>
+            <p>Wireless initialization and real-time signal quality monitoring via Bluetooth. Seamless integration into your clinical workflow.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCT SHOWCASE -->
+<section class="showcase" id="specs">
+    <div class="showcase-grid">
+        <div class="showcase-images reveal">
+            <div class="showcase-img-main">
+                <img src="https://www.medlab.co.il/wp-content/uploads/2023/08/NetECG-Device.jpg" alt="net_ECG device close-up">
+            </div>
+            <div class="showcase-img-row">
+                <div class="showcase-img-small">
+                    <img src="https://www.biotronik.com/sites/default/bio_files/styles/large/public/2024-07/net_ECG_mit_DSt_Persp_Freisteller.png" alt="net_ECG recorder perspective view">
+                </div>
+                <div class="showcase-img-small">
+                    <img src="https://www.biotronik.com/sites/default/bio_files/styles/large/public/2024-07/LIV-BIO_net_ECG_connect_V2_2020-04-03_psd.jpg" alt="net_ECG CONNECT charging cradle">
+                </div>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="section-tag">Technical Specifications</div>
+            <h2 class="section-title">Precision in every<br>millimeter.</h2>
+            <p class="section-desc">The net_ECG packs advanced cardiac monitoring technology into a device smaller than a matchbox.</p>
+            <div class="spec-list">
+                <div class="spec-item">
+                    <span class="spec-label">Dimensions</span>
+                    <span class="spec-value">50 &times; 50 &times; 13.5 <span class="highlight">mm</span></span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Weight</span>
+                    <span class="spec-value">23 <span class="highlight">grams</span></span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">ECG Channels</span>
+                    <span class="spec-value">3-lead <span class="highlight">simultaneous</span></span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Battery Life</span>
+                    <span class="spec-value">Up to <span class="highlight">12 days</span> / charge</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Extended Monitoring</span>
+                    <span class="spec-value">Up to <span class="highlight">60 days</span></span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Water Resistance</span>
+                    <span class="spec-value"><span class="highlight">IP54</span> rated</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Connectivity</span>
+                    <span class="spec-value">Bluetooth <span class="highlight">LE</span></span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Electrodes</span>
+                    <span class="spec-value">Standard adhesive <span class="highlight">ECG</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI ANALYSIS -->
+<section class="ai-section" id="analysis">
+    <div class="ai-grid">
+        <div class="ai-visual reveal">
+            <div class="ecg-label">Live ECG Trace &mdash; Lead II</div>
+            <div class="ecg-trace">
+                <svg viewBox="0 0 600 120" preserveAspectRatio="none">
+                    <path class="ecg-line-continuous" d="M0,60 L40,60 L50,60 L55,45 L60,60 L70,60 L75,20 L80,100 L85,10 L90,90 L95,60 L110,60 L115,52 L120,60 L160,60 L170,60 L175,45 L180,60 L190,60 L195,20 L200,100 L205,10 L210,90 L215,60 L230,60 L235,52 L240,60 L280,60 L290,60 L295,45 L300,60 L310,60 L315,20 L320,100 L325,10 L330,90 L335,60 L350,60 L355,52 L360,60 L400,60 L410,60 L415,45 L420,60 L430,60 L435,20 L440,100 L445,10 L450,90 L455,60 L470,60 L475,52 L480,60 L520,60 L530,60 L535,45 L540,60 L550,60 L555,20 L560,100 L565,10 L570,90 L575,60 L590,60 L595,52 L600,60"
+                          fill="none" stroke="#00b27a" stroke-width="2"/>
+                    <!-- Grid lines -->
+                    <line x1="0" y1="0" x2="600" y2="0" stroke="rgba(0,178,122,0.1)" stroke-width="0.5"/>
+                    <line x1="0" y1="30" x2="600" y2="30" stroke="rgba(0,178,122,0.1)" stroke-width="0.5"/>
+                    <line x1="0" y1="60" x2="600" y2="60" stroke="rgba(0,178,122,0.08)" stroke-width="0.5" stroke-dasharray="4,4"/>
+                    <line x1="0" y1="90" x2="600" y2="90" stroke="rgba(0,178,122,0.1)" stroke-width="0.5"/>
+                    <line x1="0" y1="120" x2="600" y2="120" stroke="rgba(0,178,122,0.1)" stroke-width="0.5"/>
+                </svg>
+            </div>
+            <div class="ai-badges">
+                <span class="ai-badge">P Wave &check;</span>
+                <span class="ai-badge">QRS Complex &check;</span>
+                <span class="ai-badge">T Wave &check;</span>
+                <span class="ai-badge">Rhythm: NSR</span>
+            </div>
+        </div>
+        <div class="ai-content reveal">
+            <div class="section-tag">Cardiomatics AI</div>
+            <h2 class="section-title">Intelligence that<br>accelerates diagnosis.</h2>
+            <p class="section-desc">Powered by the Cardiomatics platform, net_ECG leverages artificial intelligence to interpret recordings with precision &mdash; reducing your analysis workload by up to 80%.</p>
+            <div class="ai-steps">
+                <div class="ai-step">
+                    <div class="ai-step-num">1</div>
+                    <div>
+                        <h4>Continuous Recording</h4>
+                        <p>The device captures high-fidelity 3-lead ECG data around the clock, worn comfortably by the patient.</p>
+                    </div>
+                </div>
+                <div class="ai-step">
+                    <div class="ai-step-num">2</div>
+                    <div>
+                        <h4>AI-Driven Interpretation</h4>
+                        <p>Cardiomatics algorithms analyze the full recording, flagging arrhythmias and abnormalities automatically.</p>
+                    </div>
+                </div>
+                <div class="ai-step">
+                    <div class="ai-step-num">3</div>
+                    <div>
+                        <h4>Expert-Reviewed Report</h4>
+                        <p>Every AI-generated report undergoes professional clinical review before delivery to your practice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="workflow" id="workflow">
+    <div class="workflow-header reveal">
+        <div class="section-tag">Clinical Workflow</div>
+        <h2 class="section-title">From attachment to analysis<br>in four simple steps.</h2>
+        <p class="section-desc">Streamlined for busy practices. Minimal setup, maximum diagnostic value.</p>
+    </div>
+    <div class="workflow-steps">
+        <div class="wf-step reveal">
+            <div class="wf-num">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/></svg>
+            </div>
+            <h4>Initialize</h4>
+            <p>Pair via Bluetooth and assign to patient in seconds.</p>
+        </div>
+        <div class="wf-step reveal">
+            <div class="wf-num">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <h4>Attach</h4>
+            <p>Snap onto three standard adhesive electrodes on the patient's chest.</p>
+        </div>
+        <div class="wf-step reveal">
+            <div class="wf-num">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            </div>
+            <h4>Monitor</h4>
+            <p>Patient wears the device for up to 60 days of continuous recording.</p>
+        </div>
+        <div class="wf-step reveal">
+            <div class="wf-num">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h4>Report</h4>
+            <p>Receive AI-analyzed, expert-reviewed ECG report within days.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+    <h2 class="section-title">Ready to transform your<br>cardiac monitoring?</h2>
+    <p class="section-desc">Join the growing network of clinics using net_ECG to deliver better patient outcomes with less operational overhead.</p>
+    <div class="cta-buttons">
+        <a href="mailto:info@medlab.co.il" class="btn-primary">
+            Request a Demo
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="tel:+972-3-XXX-XXXX" class="btn-ghost">Contact Sales</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div>&copy; 2026 Biotronik &middot; Quality for Life</div>
+    <div class="footer-links">
+        <a href="https://www.medlab.co.il">MedLab Israel</a>
+        <a href="https://www.biotronik.com">Biotronik Global</a>
+        <a href="#">Privacy Policy</a>
+    </div>
+</footer>
+
+<!-- SCROLL REVEAL -->
+<script>
+    // Navbar scroll effect
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Intersection Observer for reveal animations
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+</script>
+
+</body>
+</html>
